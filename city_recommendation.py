@@ -13,6 +13,11 @@ from sklearn.feature_extraction.text import *
 client = boto3.client('s3')
 resource = boto3.resource('s3')
 my_bucket = resource.Bucket('sagemaker-nomadiq-data')
+# for object in my_bucket.objects.all():
+#     print(object)
+
+my_bucket.download_file('tfidf_artifacts.pickle','tfidf_artifacts.pickle')
+
 
 # Load/Open pickle files
 with open(r'tfidf_artifacts.pickle', 'rb') as f:

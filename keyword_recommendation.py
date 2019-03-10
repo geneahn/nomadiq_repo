@@ -9,13 +9,18 @@ import sys
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import *
 
+
 # Set S3 environment
 client = boto3.client('s3')
 resource = boto3.resource('s3')
 my_bucket = resource.Bucket('sagemaker-nomadiq-data')
+# for object in my_bucket.objects.all():
+#     print(object)
+
+my_bucket.download_file('tfidf_artifacts.pickle','tfidf_artifacts.pickle')
 
 # Load/Open pickle files
-with open(r'tfidf_artifacts.pickle', 'rb') as f:
+with open('tfidf_artifacts.pickle', 'rb') as f:
     cosine_sim,indices,reverse_indices,vectorizer,X_tfidf,city_dict = pickle.load(f)
 
 # Clean string with preprocessing regex rules
