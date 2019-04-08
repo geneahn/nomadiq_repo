@@ -18,7 +18,8 @@ with open('collab_filter_artifacts.pickle', 'rb') as f:
     df_travel_features,cosine_sim,city_dict,popular_cities = pickle.load(f)
 
 def get_recommendations_city(places_visited):
-    '''Enter a list of cities and get recommendations back'''
+    '''Enter a list of cities and get recommendations back
+    You can enter multiple cities delimited by comma (no space)'''
     places_visited = places_visited.split(",")
     places_visited = [place.title() for place in places_visited]
     # print(places_visited)
