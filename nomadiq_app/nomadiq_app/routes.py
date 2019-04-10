@@ -54,8 +54,8 @@ def collaborative_recommend():
         for item in new_rec_list:
             url = ims.get_img(item["location_name"])
             item.update( {'image_url' : url} )
-            # poi_list.update({item["location_name"]:ps.get_poi_img(item["location_name"],3)})
-            poi_list.update({item["location_name"]:ps.get_ig_most_recent(item["location_name"],3)})
+            poi_list.update({item["location_name"]:ps.get_poi_img(item["location_name"],3)})
+            # poi_list.update({item["location_name"]:ps.get_ig_most_recent(item["location_name"],3)})
         return render_template('results.html', recommendation_header="Recommended Cities for you.", search_filter_header="Showing cities similar to ",search_value=seed_cities, rec_list=new_rec_list, poi_list=poi_list)
     except:
         return render_template("welcome.html",text_guide="Unable to find results for "+str(seed_cities))
@@ -76,7 +76,7 @@ def recommend_city():
     except:
         return render_template("discover.html",text_guide="Unable to find results for "+str(seed_city))
 
-@app.route("/recommend_keyword",methods=["POST","GET"])
+@app.route("/recommend_keyword",methods=["POST"])
 def recommend_keyword():
     # get search values
     keyword = request.form.get("keyword")
