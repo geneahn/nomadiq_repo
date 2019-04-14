@@ -16,18 +16,19 @@ my_bucket = resource.Bucket('sagemaker-nomadiq-data')
 # for object in my_bucket.objects.all():
 #     print(object)
 
+# Get all tfidf artifacts from S3
+# These artifacts were built in a separate TFIDF.ipynb notebook
 my_bucket.download_file('tfidf_artifacts.pickle','tfidf_artifacts.pickle')
-
 
 # Load/Open pickle files
 with open(r'tfidf_artifacts.pickle', 'rb') as f:
     cosine_sim,indices,reverse_indices,vectorizer,X_tfidf,city_dict = pickle.load(f)
 
 # Clean string with preprocessing regex rules
+# Modified from https://github.com/yoonkim/CNN_sentence/blob/master/process_data.py
 def clean_str(string):
     """
     Tokenization/string cleaning for all datasets
-    Original taken from https://github.com/yoonkim/CNN_sentence/blob/master/process_data.py
     """
     string = re.sub(r"[^A-Za-z0-9(),!?\'\`]", " ", string)
     string = re.sub(r"\'s", " \'s", string)
@@ -55,6 +56,7 @@ def clean_str(string):
     return string.strip().lower()
 
 def get_recommendations_city(city, cosine_sim=cosine_sim):
+    '''Input a city and return the top 10 most similar cities'''
     city = city.title()
     idx = reverse_indices[city]
     # Get the pairwise similarity scores of all cities
