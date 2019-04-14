@@ -11,7 +11,7 @@ Nomadiq is a personalized travel discovery tool to help people find their next d
 
 TBD
 
-## Test Application Locally
+## Repo Contents
 
 Repo includes the following ipython notebooks:
 - nomadiq_eda: Exploratory data analysis of Instagram travel data.
@@ -19,6 +19,7 @@ Repo includes the following ipython notebooks:
 - CNN_Prod: Gluon code that executes forward pass on the training model. Input are custom keywords from the user and output is the travel recommendation (e.g., 'surfing beach' --> 'San Diego'.
 - TFIDF: Location recommender using content-based filtering.
 - Collaborative_Filtering: Location recommender using collaborative filtering.
+- wikitravel_scrape: Script to scrape Wikitravel data.
 
 The products above were used to build the nomadiq_app, which ties both the content and collaborative filtering models with a Flask front-end. See nomadiq_app for instructions on how to set the environment and test.
 
