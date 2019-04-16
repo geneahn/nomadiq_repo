@@ -5,11 +5,17 @@ Authors: Linh Tran, Gene Ahn, James Beck
 
 ## Description
 
-Nomadiq is a personalized travel discovery tool to help people find their next destination. Like how Netflix recommends shows you may like, or Spotify creates a discovery playlist, Nomadiq is the travel analog.
+Nomadiq is a personalized travel inspiration web application to help people find their next destination. Like how Netflix recommends show or movies you may like, or how Spotify creates a discovery playlist, Nomadiq is the travel discovery platform.
 
 ## Production URl
 
-TBD
+www.thenomadiq.com
+
+## Tech Stack & Frameworks
+- Client: HTML, Javascript (JQuery)
+- Server: Python (Flask), Jinja
+- Cloud: AWS Sagemaker, AWS Elastic Beanstalk
+- Third Party APIs / Data: Wikitravel, Instagram, Instagram-Scraper API, Bing
 
 ## Repo Contents
 
@@ -23,3 +29,5 @@ Repo includes the following ipython notebooks:
 
 The products above were used to build the nomadiq_app, which ties both the content and collaborative filtering models with a Flask front-end. See nomadiq_app for instructions on how to set the environment and test.
 
+## Additional Resources
+- Final Presentation: https://docs.google.com/presentation/d/1gtFhi5uNplOGJ4ZnGkg4HDiBjWxBJAk2FMLubqC0nFY/edit#slide=id.g4d1954b095_0_6
