@@ -6,29 +6,22 @@
   <img class="w3-image" src="{{ url_for('static', filename='img/plane_purple_cropped.jpg') }}" alt="temp" width=100%>
   <div class="w3-display-middle" style="width:65%">
 
-    <!-- <div class="w3-bar w3-black">
-      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Make It Personal');"><i class="fa fa-search w3-margin-right"></i>Make It Personal</button>
-      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Keyword Search');">Keyword Search</button>
-    </div> -->
-
     <div class="w3-display-left w3-padding w3-col">
       <div class="w3-container w3-blue">
-        <!-- <h2><i class="fa fa-robot w3-margin-right"></i>Welcome</h2> -->
-        <h3>Welcome</h3>
+        <h2><i class="fa fa-robot w3-margin-right"></i>Welcome</h2>
       </div>
     <div class="w3-container w3-white w3-padding-16">
       <h4>Welcome to Nomadiq! If you're looking for travel inspiration, you've come to the right place.
         <p>Why don’t you tell me a bit about yourself so I can help you? I learn better when you create an account and link your Instagram so I can see what kinds of places you like to go to. Would you mind sharing your IG posts?</h4>
       <div  id='intro' class="w3-row-padding" style="margin:0 -16px;">
         <div class="w3-half w3-margin-bottom">
-          <button class="w3-bar-item w3-button w3-light-grey tablink" onclick="openLink(event, 'Logging In');"><i class="fab fa-instagram w3-margin-right"></i>Not at all, login to Instagram.</button>
+          <button class="w3-bar-item w3-button w3-light-grey tablink" onclick="document.getElementById('Auth').style.display='block'" ><i class="fab fa-instagram w3-margin-right"></i>Not at all, login to Instagram.</button>
         </div>
         <div class="w3-half">
           <button class="w3-bar-item w3-button w3-light-grey tablink" onclick="openLink(event, 'List Cities');">I don’t want to share or don’t have one.</button>
         </div>
       </div>
       <div id="Logging In" class="w3-container w3-white w3-padding-16 myLink w3-mobile" style="margin:8px -16px;">
-        <h4>Great! Login below to create an account. Your information will not be shared with any third parties.</h4>
         <form action="/action_page.php" target="_blank">
           <div class="w3-row-padding" style="margin:0 -16px;">
             <div class="w3-half w3-margin-bottom">
@@ -54,25 +47,5 @@
 </div>
 </div>
 </header>
-
-<script>
-// Tabs
-function openLink(evt, linkName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("myLink");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
-  }
-  document.getElementById(linkName).style.display = "block";
-  evt.currentTarget.className += " w3-blue";
-}
-
-// Click on the first tablink on load
-// document.getElementsByClassName("tablink")[0].click();
-</script>
 
 {% endblock content %}

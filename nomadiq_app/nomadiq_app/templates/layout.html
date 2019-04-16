@@ -3,38 +3,124 @@
 <title>NOMADIQ</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/w3style.css') }}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .myLink {display: none}
 </style>
-<body class="w3-light-grey">
+<script>
+
+// Modal Tabs
+function toggleToSignup(evt) {
+  document.getElementById("SignUp").style.display = "block";
+  document.getElementById("LogIn").style.display = "none";
+}
+function toggleToLogin(evt) {
+  document.getElementById("SignUp").style.display = "none";
+  document.getElementById("LogIn").style.display = "block";
+}
+
+// Search Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-blue";
+}
+
+// Click on the first tablink on load
+// document.getElementsByClassName("tablink")[0].click();
+</script>
+
+<body class="w3-white w3-padding-32">
+
   <!-- Navigation Bar -->
-  <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-    <a href="{{ url_for('welcome') }}" class="w3-bar-item w3-button w3-text-blue w3-hover-blue w3-mobile"><b><i class="fa fa-map-marker w3-margin-right"></i>nomadiq</b></a>
-    <a href="{{ url_for('discover') }}" class="w3-bar-item w3-button w3-text-blue w3-hover-blue w3-text-grey w3-mobile"><b>discover</b></a>
-    <a href="#" class="w3-bar-item w3-button w3-text-blue w3-hover-blue w3-text-grey w3-mobile"><b>plan</b></a>
-    <a href="#" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey w3-mobile"><b><i class="fa fa-user"></i> log in</b></a>
+  <div class="w3-bar w3-white w3-border-bottom w3-xlarge w3-top">
+    <a href="{{ url_for('home') }}" class="w3-bar-item w3-button w3-text-blue w3-hover-blue w3-mobile"><b>nomadiq</b></a>
+    <a href="{{ url_for('about') }}" class="w3-bar-item w3-button w3-text-blue w3-hover-blue w3-mobile"><b>about</b></a>
+    <span onclick="document.getElementById('Auth').style.display='block'" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey w3-mobile"><b><i class="fa fa-user"></i> account</b></span>
+    <span onclick="document.getElementById('Auth').style.display='block'" class="w3-bar-item w3-button w3-right w3-text-blue w3-hover-blue w3-text-grey w3-mobile"><b>plan</b></span>
+    <a href="{{ url_for('discover') }}" class="w3-bar-item w3-button w3-right w3-text-blue w3-hover-blue w3-text-grey w3-mobile"><b>discover</b></a>
   </div>
 
+  <!-- Sign Up Login Modal -->
+  <div id="Auth" class="w3-modal">
+    <div id="SignUp" class="w3-modal-content w3-card-4 w3-animate-top" style="width:450px;">
+      <header class="w3-container w3-blue w3-display-container">
+        <span onclick="document.getElementById('Auth').style.display='none'" class="w3-button w3-blue w3-display-topright"><i class="fa fa-remove"></i></span>
+        <p><h4>Create an Account</h4></p>
+      </header>
+      <div class="w3-container">
+        <form action="/action_page.php" target="_blank">
+          <div class="w3-row-padding" style="margin:0 -16px;">
+            <!-- <div class="w3-half w3-margin-bottom"> -->
+            <div class="w3-margin-bottom">
+              <p><label>Create username</label></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="" name="ig_handle" required></p>
+             <!-- </div>
+             <div class="w3-half"> -->
+              <p><label>Create password</label></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="" name="ig_pw" required></p>
+              <p><label>Confirm password</label></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="" name="ig_pw" required></p>
+              <p><button class="w3-button w3-dark-grey" type="submit">Create Account</button></p>
+             </div>
+           </div>
+           <h5><i class="fab fa-instagram w3-margin-right"></i>(Login with Instagram option coming soon!)</h5>
+         </form>
+      </div>
+      <footer class="w3-container w3-blue modalFoot">
+        <p>Already have an account? <a onclick="toggleToLogin(event);" style="cursor:pointer;"><u>Log in here.</u></a></p>
+      </footer>
+    </div>
+    <div id="LogIn" class="w3-modal-content w3-card-4 w3-animate-top" style="width:450px;">
+      <header class="w3-container w3-blue w3-display-container">
+        <span onclick="document.getElementById('Auth').style.display='none'" class="w3-button w3-blue w3-display-topright"><i class="fa fa-remove"></i></span>
+        <p><h4>Log in to your account.</h4></p>
+      </header>
+      <div class="w3-container">
+        <form action="/action_page.php" target="_blank">
+          <div class="w3-row-padding" style="margin:0 -16px;">
+            <!-- <div class="w3-half w3-margin-bottom"> -->
+            <div class="w3-margin-bottom">
+              <p><label>Username</label></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="" name="ig_handle" required></p>
+             <!-- </div>
+             <div class="w3-half"> -->
+              <p><label>Password</label></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="" name="ig_pw" required></p>
+              <p><button class="w3-button w3-dark-grey" type="submit">Log In</button></p>
+             </div>
+           </div>
+         </form>
+      </div>
+      <footer class="w3-container w3-blue modalFoot">
+        <p>Need to create an account? <a onclick="toggleToSignup(event);" style="cursor:pointer;"><u>Sign up here.</u></a></p>
+      </footer>
+    </div>
+  </div>
 {% block content %} {% endblock %}
 
+<script>
+document.getElementById("SignUp").style.display = "none";
+</script>
+
 <!-- Footer -->
-<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
-  <!-- <h5>Find Us On</h5>
-  <div class="w3-xlarge w3-padding-16">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div> -->
+<!-- <footer class="w3-container w3-light-grey w3-center w3-opacity w3-margin-bottom"> -->
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center">
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
 

@@ -2,49 +2,49 @@
 {% block content %}
 <!-- Page content -->
 <div id="recs_grid" class="w3-content" style="max-width:1100px;">
-<meta id="my-data" data-city="{{rec_list|safe}}" data-poi="{{poi_list|safe}}">
 
-  <!-- Cities -->
   <div class="w3-container w3-margin-top">
     <h3>{{recommendation_header}}</h3>
     <h6>{{search_filter_header}}<strong>{{search_value}}</strong></h6>
   </div>
-  <div class="w3-row-padding w3-text-white w3-large">
-    {% for item in rec_list%}
-    <div id='city_cell' class="w3-quarter">
-      <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-half w3-margin-bottom">
-          <div class="w3-display-container">
-            <img src="{{item.image_url}}" alt="{{item.location_name}}" style="height:250px; width:250px; background-position:center; overflow:hidden; object-fit:cover">
-            <span class="w3-display-bottomleft w3-padding">{{item.location_name}}</span>
-          </div>
-        </div>
+
+  <!-- Cities -->
+  <div class="w3-row-padding w3-margin-top">
+  {% for item in rec_list%}
+  <div id='city_cell' class="w3-quarter">
+    <div class="w3-display-container w3-hover-shadow w3-card-4">
+      <img src="{{item.image_url}}" alt="{{item.location_name}}" class="w3-hover-opacity" style="height:220px; width:100%; background-position:center; overflow:hidden; object-fit:cover;">
+      <div class="w3-display-topright">
+        <button class="w3-opacity w3-hover-opacity-off" onclick="document.getElementById('Auth').style.display='block'"><i class="fas fa-heart"></i></button>
+      </div>
+      <div class="w3-container w3-white">
+        <p><a href="{{item.image_url}}" target=_blank>{{item.location_name}}</a></p>
       </div>
     </div>
-      {% for i in range(3)%}
-      <div id='poi_img{{i}}' class="w3-quarter">
-        <div class="w3-row-padding" style="margin:0 -16px">
-          <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-              <img src="{{poi_list[item.location_name][i]}}" alt="{{item.location_name}}" style="height:250px; width:250px; background-position:center; overflow:hidden; object-fit:cover">
-            </div>
-          </div>
+  </div>
+  {% for i in range(0,3)%}
+  <div id='poi_img{{i}}' class="w3-quarter">
+    <div class="w3-display-container w3-hover-shadow w3-card-4">
+      <img src="{{item.poi_list[i]}}" alt="{{item.location_name}}" class="w3-hover-opacity" style="height:220px; width:100%; background-position:center; overflow:hidden; object-fit:cover;">
+      <div class="w3-display-topright">
+        <button class="w3-opacity w3-hover-opacity-off" onclick="document.getElementById('Auth').style.display='block'"><i class="fas fa-heart"></i></button>
+      </div>
+        <div class="w3-container w3-white">
+          <p><a href="{{item.poi_list[i]}}" target=_blank>{{item.location_name}}</a></p>
         </div>
       </div>
-      {% endfor %}
-      <!-- Slideshow next/previous buttons -->
-      <div class="w3-container w3-padding h6 w3-xlarge">
-        <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-blue w3-hover-text-blue"></i></div>
-        <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-blue w3-hover-text-blue"></i></div>
-      </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
+  <div class="w3-container w3-row-padding">
+    <p><a href="{{item.wikitravel_page}}" target=_blank class="w3-button w3-white w3-border"><b>Learn more about {{item.location_name}}>> </b></a></p>
+    <hr>
+  </div>
+  {% endfor %}
 
 <!-- End page content -->
 </div>
 
 <!-- Scroll to next images -->
 <script type="text/javascript">
-  var i = 0;
-  var j = 2;
 </script>
 {% endblock content %}

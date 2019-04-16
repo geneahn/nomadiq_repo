@@ -1,13 +1,11 @@
-from nomadiq_app import app
-
 # General libraries.
 import re
 import numpy as np
 import pandas as pd
-import json
-import pickle
-import boto3
-import sys
+# import json
+# import pickle
+# import boto3
+# import sys
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import *
 
@@ -70,8 +68,16 @@ def get_recommendations_city(city, cosine_sim,indices,reverse_indices,vectorizer
     city_indices = [i[0] for i in sim_scores]
     city_recs = []
     loop_count = 0
+    # Get TFIDF words
+    dense_matrix = X_tfidf.toarray()
+    vocab_dict = vectorizer.vocabulary_
+    vocab_reverse = {y:x for x,y in vocab_dict.items()}
     for city in indices.iloc[city_indices]:
-        city_recs.append({"location_id": city_dict[city], "location_name": city, "cosine_similarity": sim_scores[loop_count][1]})
+        # Get top (3) words associated with city
+        city_index = list(indices).index(city.title())
+        top_word_index = sorted(range(len(dense_matrix[city_index])), key=lambda i: dense_matrix[city_index][i], reverse=True)[:3]
+        # Create JSON for city recs
+        city_recs.append({"location_id": city_dict[city], "location_name": city, "cosine_similarity": sim_scores[loop_count][1],"top_words": [vocab_reverse[word] for word in top_word_index]})
         loop_count += 1
     # Return the top 10 most similar cities
     # print(json.dumps(city_recs))

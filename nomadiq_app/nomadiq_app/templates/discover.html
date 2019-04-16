@@ -2,18 +2,18 @@
 {% block content %}
 
 <!-- Header -->
-<header class="w3-display-container w3-content w3-margin-right" style="max-width:1500px">
+<header class="w3-display-container w3-content" style="max-width:1500px">
   <img class="w3-image" src="{{ url_for('static', filename='img/plane_purple_cropped.jpg') }}" alt="temp" width=100%>
   <div class="w3-display-middle" style="width:65%">
+
     <div class="w3-bar w3-black">
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Similar City');"><i class="fa fa-search w3-margin-right"></i>Find Similar Cities</button>
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Keyword Search');">Keyword Search</button>
-      <!-- <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Timeframe Search');">Timeframe Search</button> -->
     </div>
 
     <!-- Tabs -->
     <div id="Similar City" class="w3-container w3-white w3-padding-16 myLink w3-mobile">
-      <h3>Receive recommended locations similar to your favorite city.</h3>
+      <h3>Find recommendations similar to the city of:</h3>
       <form action="/recommend_city" method="POST">
         <input name="seed_city" class="w3-input w3-border" type="text" placeholder="{{text_guide}}">
         <p><input type="submit" class="w3-button w3-dark-grey" value="Show Recommendations"></p>
@@ -22,34 +22,20 @@
       </form>
     </div>
     <div id="Keyword Search" class="w3-container w3-white w3-padding-16 myLink w3-mobile">
-      <h3>Describe what you're looking for with keyords.</h3>
-      <form action="/recommend_keyword" method="post">
+      <h3>Describe what you're looking for with keywords.</h3>
+      <form action="/recommend_keyword" method="POST">
         <input name="keyword" class="w3-input w3-border" type="text" style="width:100%" placeholder="Keyword">
         <!-- <p><button onclick="" class="w3-button w3-dark-grey">Search on Keywords</button></p> -->
         <p><input type="submit" class="w3-button w3-dark-grey" value="Search on Keywords"></p>
-    </form>
+      </form>
     </div>
 
+</div>
 </header>
 
 <script>
-// Tabs
-function openLink(evt, linkName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("myLink");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
-  }
-  document.getElementById(linkName).style.display = "block";
-  evt.currentTarget.className += " w3-blue";
-}
-
-// Click on the first tablink on load
 document.getElementsByClassName("tablink")[0].click();
 </script>
+
 
 {% endblock content %}

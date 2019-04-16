@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Header -->
+<header class="w3-display-container w3-center">
+  <!-- <button class="w3-button w3-block w3-green w3-hide-large w3-hide-medium" onclick="document.getElementById('download').style.display='block'">Download <i class="fa fa-android"></i> <i class="fa fa-apple"></i> <i class="fa fa-windows"></i></button> -->
+  <div class="mySlides w3-animate-opacity">
+    <img class="w3-image" src="{{ url_for('static', filename='img/plane_purple_cropped.jpg') }}" alt="plane" style="min-width:500px" width="1500" height="1000">
+    <div class="w3-display-middle w3-padding w3-hide-small" style="width:35%">
+      <div class="w3-black w3-opacity w3-hover-opacity-off w3-padding-large">
+        <h1 class="w3-xlarge">Discover your next travel destination.</h1>
+        <hr class="w3-opacity">
+        <p>Personalized for you.</p>
+        <p><a href="{{ url_for('welcome') }}" class="w3-button w3-block w3-blue"><i class="fa fa-globe fa-fw"></i>Get started</a></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- About the Team -->
+<div id="about" class="w3-container w3-content w3-padding-64 w3-row-padding" style="max-width:1000px">
+ <div class="w3-row-padding">
+   <h2 class="w3-wide w3-center">TEAM</h2>
+   <p class="w3-opacity w3-center"><i>Berkeley MIDS Summer 2019 capstone project.</i></p><br>
+
+     <div class="w3-third w3-margin-bottom">
+       <div class="w3-card-4">
+         <img src="{{ url_for('static', filename='img/linhmtran.jpeg') }}" alt="Linh" style="width:100%">
+         <div class="w3-container">
+           <h3>Linh Tran</h3>
+           <p class="w3-opacity">Front-End</p>
+           <p>Product manager by day, python wrangler by night. Up for any travel adventure, from solo backpacking to squad globetrotting.</p>
+           <h3><a href="mailto:linhmtran@berkeley.edu"target="_blank"><i class="fas fa-envelope fa-fw w3-hover-opacity"></i></a><a href="https://linkedin.com/in/linhmtran/" target="_blank"><i class="fab fa-linkedin fa-fw w3-hover-opacity"></i></a></h3>
+         </div>
+       </div>
+     </div>
+
+     <div class="w3-third w3-margin-bottom">
+       <div class="w3-card-4">
+         <img src="{{ url_for('static', filename='img/geneahn.jpeg') }}" alt="Gene" style="width:100%">
+         <div class="w3-container">
+           <h3>Gene Ahn</h3>
+           <p class="w3-opacity">Back-End</p>
+           <p>Data enthusiast, seeking recommendations for recommender systems. Searching for a cheeseburger in paradise.</p>
+           <h3><a href="mailto:ahn.gene@berkeley.edu" target="_blank"><i class="fas fa-envelope fa-fw w3-hover-opacity"></i></a><a href="https://linkedin.com/in/geneahn/" target="_blank"><i class="fab fa-linkedin fa-fw w3-hover-opacity"></i></a></h3>
+         </div>
+       </div>
+     </div>
+
+     <div class="w3-third w3-margin-bottom">
+       <div class="w3-card-4">
+         <img src="{{ url_for('static', filename='img/jamesbeck.jpeg') }}" alt="James" style="width:100%">
+         <div class="w3-container">
+           <h3>James Beck</h3>
+           <p class="w3-opacity">Data</p>
+           <p>Program manager, factory optimizer, frequent flyer. Circadian rhythm perpetually out of sync.</p>
+           <h3><a href="mailto:jmbeck@berkeley.edu" target="_blank"><i class="fas fa-envelope fa-fw w3-hover-opacity"></i></a><a href="https://www.linkedin.com/in/james-m-beck/" target="_blank"><i class="fab fa-linkedin fa-fw w3-hover-opacity"></i></a></h3>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ {% if section %}
+ <script>
+     $(function() {
+        $("html, body").animate({ scrollTop: $("#{{ section }}").offset().top }, 500);
+     });
+ </script>
+ {% endif %}
+
+{% endblock content %}

@@ -1,5 +1,3 @@
-from nomadiq_app import app
-
 # General libraries.
 import numpy as np
 import pandas as pd
@@ -19,7 +17,7 @@ import sys
 # with open('collab_filter_artifacts.pickle', 'rb') as f:
 #     df_travel_features,cosine_sim,city_dict,popular_cities = pickle.load(f)
 
-def collab_get_recommendations_city(places_visited,df_travel_features,cosine_sim,city_dict,popular_cities):
+def collab_get_recommendations_city(places_visited,df_travel_features,cosine_sim,city_dict,popular_cities, X_tfidf,vectorizer,indices2):
     '''Enter a list of cities and get recommendations back
     You can enter multiple cities delimited by comma (no space)'''
     places_visited = places_visited.split(",")
@@ -63,10 +61,19 @@ def collab_get_recommendations_city(places_visited,df_travel_features,cosine_sim
             break
     city_recs = []
     loop_count = 0
+
+    # Get TFIDF words
+    dense_matrix = X_tfidf.toarray()
+    vocab_dict = vectorizer.vocabulary_
+    vocab_reverse = {y:x for x,y in vocab_dict.items()}
+
     for city in recommendations:
-        city_recs.append({"location_id": city_dict[city], "location_name": city, "cosine_similarity": ratings_list[loop_count]})
+        # Get top (3) words associated with city
+        city_index = list(indices2).index(city.title())
+        top_word_index = sorted(range(len(dense_matrix[city_index])), key=lambda i: dense_matrix[city_index][i], reverse=True)[:3]
+        # create JSON recommendation
+        city_recs.append({"location_id": city_dict[city], "location_name": city, "cosine_similarity": ratings_list[loop_count],"top_words": [vocab_reverse[word] for word in top_word_index]})
         loop_count += 1
-    print(city_recs)
     return city_recs
 
 # get_recommendations_city(sys.argv[1])

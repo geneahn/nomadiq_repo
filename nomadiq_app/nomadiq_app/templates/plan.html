@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Page content -->
+<div id="recs_grid" class="w3-content" style="max-width:1100px;">
+
+  <div class="w3-container w3-margin-top">
+    <h3>{{recommendation_header}}</h3>
+    <h6>{{search_filter_header}}<strong>{{search_value}}</strong></h6>
+  </div>
+
+  <!-- Cities -->
+  <div class="w3-row-padding w3-margin-top">
+  {% for item in rec_list%}
+  <!-- <div>
+    <button onclick="return false;"><i class="fas fa-angle-left"></i></button>
+  </div> -->
+  <div id='city_cell' class="w3-quarter">
+    <div class="w3-display-container w3-hover-shadow w3-card-4">
+      <img src="{{item.image_url}}" alt="{{item.location_name}}" class="w3-hover-opacity" style="height:220px; width:100%; background-position:center; overflow:hidden; object-fit:cover;">
+      <div class="w3-display-topright">
+        <button class="w3-opacity w3-hover-opacity-off"><i class="fas fa-heart"></i></button>
+      </div>
+      <div class="w3-container w3-white">
+        <p>{{item.location_name}}</p>
+      </div>
+    </div>
+  </div>
+  {% for i in range(0,3)%}
+  <div id='poi_img{{i}}' class="w3-quarter">
+    <div class="w3-display-container w3-hover-shadow w3-card-4">
+      <img src="{{item.poi_list[i]}}" alt="{{item.location_name}}" class="w3-hover-opacity" style="height:220px; width:100%; background-position:center; overflow:hidden; object-fit:cover;">
+      <div class="w3-display-topright">
+        <button class="w3-opacity w3-hover-opacity-off"><i class="fas fa-heart"></i></button>
+      </div>
+        <div class="w3-container w3-white">
+          <p>{{item.location_name}}</p>
+        </div>
+      </div>
+  </div>
+  {% endfor %}
+  <!-- <div>
+    <button onclick="return false;"><i class="fas fa-angle-left"></i></button>
+  </div> -->
+  <div class="w3-container w3-row-padding">
+    <p><button class="w3-button w3-white w3-border"><b>Learn more about {{item.location_name}} >> </b></button></p>
+    <hr>
+  </div>
+  {% endfor %}
+
+<!-- End page content -->
+</div>
+
+<!-- Scroll to next images -->
+<script type="text/javascript">
+  var i = 0;
+  var j = 4;
+</script>
+{% endblock content %}
